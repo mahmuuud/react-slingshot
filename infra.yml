@@ -7,6 +7,9 @@ Resources:
       KeyName: Udacity
       ImageId: 'ami-0767046d1677be5a0'
       InstanceType: 't2.micro'
+      Tags:
+        - Key: "name"
+          Value: "udacity"
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:

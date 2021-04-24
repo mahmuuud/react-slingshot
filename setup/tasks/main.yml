@@ -1,0 +1,30 @@
+---
+- name: "update apt packages"
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: "upgrade apt packages"
+  become: yes
+  apt:
+    upgrade: yes
+
+- name: "install depend"
+  become: yes
+  apt:
+    name: ["nodejs", "build-essential"]
+    state: latest
+    update_cache: yes
+
+
+- name: "copy server js file"
+  become: yes
+  copy:
+    src: index.js
+    dest: /index.js
+    backup: yes
+
+- name: "executing node"
+  shell: |
+    node /index.js
+    

@@ -1,0 +1,6 @@
+---
+- name: exercise for setting hello world apache
+  hosts: all
+  user: ubuntu
+  roles:
+    - setup
