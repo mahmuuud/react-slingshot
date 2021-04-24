@@ -68,6 +68,22 @@ jobs:
       - run: apk add --update ansible
       - run: cat inventory.txt
       - run: ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.txt playbook.yml
+
+  smoke_test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run: apk add --update curl
+      - run:
+          name: smoke test
+          command: |
+            if curl -s --head "google.com"
+            then
+              return 0
+            else
+              return 1
+            fi
       
 
       
@@ -84,6 +100,9 @@ workflows:
       - configure_server:
           requires:
             - create-ansible-inventory
+      - smoke_test:
+          requires:
+            - configure_server
       # - build
       # - test:
       #     requires:
